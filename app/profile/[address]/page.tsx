@@ -152,7 +152,7 @@ export default function PublicProfilePage() {
                               )}
                               {c.tags.length > 0 && (
                                 <div className="flex flex-wrap gap-1.5">
-                                  {c.tags.map((t) => <Chip key={t}>{t}</Chip>)}
+                                  {c.tags.map((t: string) => <Chip key={t}>{t}</Chip>)}
                                 </div>
                               )}
                               <div className="grid grid-cols-1 gap-2 border-t border-border pt-3 text-xs sm:grid-cols-2">
