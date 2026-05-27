@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { storeVerificationEntity } from '@/lib/arkiv';
 import { readSession } from '@/lib/session';
+import { flattenZodError } from '@/lib/zod-utils';
 
 const Body = z.object({
   credentialId: z.string().min(1),
@@ -12,12 +13,12 @@ const Body = z.object({
 
 export async function POST(req: NextRequest) {
   try {
-    const session = readSession();
+    const session = await readSession();
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const parsed = Body.safeParse(await req.json());
     if (!parsed.success) {
-      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+      return NextResponse.json({ error: flattenZodError(parsed.error) }, { status: 400 });
     }
 
     const credential = await prisma.credential.findUnique({

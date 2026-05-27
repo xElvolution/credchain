@@ -4,26 +4,27 @@ import { prisma } from '@/lib/prisma';
 import { ensureProfileEntity, storeCredentialEntity } from '@/lib/arkiv';
 import { readSession } from '@/lib/session';
 import { CREDENTIAL_TYPES } from '@/types';
+import { flattenZodError } from '@/lib/zod-utils';
 
 const Body = z.object({
   type: z.enum(['WORK', 'PROJECT', 'SKILL', 'EDUCATION', 'HACKATHON', 'CERTIFICATION', 'CONTRIBUTION']),
   title: z.string().min(1).max(200),
   organization: z.string().min(1).max(200),
   description: z.string().max(4000).optional(),
-  startDate: z.string().datetime().optional().or(z.string().length(0).optional()),
-  endDate: z.string().datetime().optional().or(z.string().length(0).optional()),
-  url: z.string().url().optional().or(z.string().length(0).optional()),
+  startDate: z.iso.datetime().optional().or(z.string().length(0).optional()),
+  endDate: z.iso.datetime().optional().or(z.string().length(0).optional()),
+  url: z.url().optional().or(z.string().length(0).optional()),
   tags: z.array(z.string().min(1).max(40)).max(20).default([]),
 });
 
 export async function POST(req: NextRequest) {
   try {
-    const session = readSession();
+    const session = await readSession();
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const parsed = Body.safeParse(await req.json());
     if (!parsed.success) {
-      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+      return NextResponse.json({ error: flattenZodError(parsed.error) }, { status: 400 });
     }
     const input = parsed.data;
     if (!CREDENTIAL_TYPES.includes(input.type)) {

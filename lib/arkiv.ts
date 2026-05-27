@@ -18,6 +18,6 @@ export {
   type ArkivWriteResult,
   type ArkivVerifyResult,
   type ArkivEntityProof,
-} from './service';
+} from './arkiv/service';
 
-export { getArkivPublicClient, getArkivWalletClient, braga } from './client';
+export { getArkivPublicClient, getArkivWalletClient, braga } from './arkiv/client';

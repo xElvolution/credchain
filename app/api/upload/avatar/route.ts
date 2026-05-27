@@ -8,7 +8,7 @@ const ALLOWED = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
 
 export async function POST(req: NextRequest) {
   try {
-    const session = readSession();
+    const session = await readSession();
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     if (!getServiceSupabase()) {

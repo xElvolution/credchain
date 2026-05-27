@@ -47,8 +47,9 @@ export function createSession(address: string): string {
   return pack(session as unknown as Record<string, unknown>);
 }
 
-export function readSession(): Session | null {
-  const c = cookies().get(COOKIE_NAME);
+export async function readSession(): Promise<Session | null> {
+  const store = await cookies();
+  const c = store.get(COOKIE_NAME);
   if (!c) return null;
   const session = unpack<Session>(c.value);
   if (!session) return null;

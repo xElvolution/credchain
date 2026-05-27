@@ -4,14 +4,15 @@ import { prisma } from '@/lib/prisma';
 import { ensureProfileEntity, updateProfileEntity } from '@/lib/arkiv';
 import { readSession } from '@/lib/session';
 import { reputationScore } from '@/lib/utils';
+import { flattenZodError } from '@/lib/zod-utils';
 
 const PatchBody = z.object({
   username: z.string().min(2).max(40).regex(/^[a-zA-Z0-9_-]+$/).optional().or(z.null()),
   bio: z.string().max(280).optional().or(z.null()),
-  website: z.string().url().optional().or(z.literal('')).or(z.null()),
+  website: z.url().optional().or(z.literal('')).or(z.null()),
   twitter: z.string().max(40).optional().or(z.null()),
   github: z.string().max(40).optional().or(z.null()),
-  avatar: z.string().url().optional().or(z.null()),
+  avatar: z.url().optional().or(z.null()),
 });
 
 export async function GET(req: NextRequest) {
@@ -59,12 +60,12 @@ export async function GET(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   try {
-    const session = readSession();
+    const session = await readSession();
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const parsed = PatchBody.safeParse(await req.json());
     if (!parsed.success) {
-      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+      return NextResponse.json({ error: flattenZodError(parsed.error) }, { status: 400 });
     }
 
     const cleaned: Record<string, string | null> = {};

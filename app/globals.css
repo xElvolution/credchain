@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config "../tailwind.config.ts";
 
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
@@ -10,7 +9,7 @@
 }
 
 * {
-  border-color: theme('colors.border');
+  border-color: var(--color-border);
 }
 
 html {
@@ -82,7 +81,7 @@ body {
   }
 
   .card-hover:hover {
-    border-color: theme('colors.border-bright');
+    border-color: var(--color-border-bright);
     box-shadow: 0 0 40px -12px rgba(79, 70, 229, 0.35);
   }
 

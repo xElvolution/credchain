@@ -32,7 +32,9 @@ export function Providers({ children }: { children: ReactNode }) {
         },
         loginMethods: ['email', 'wallet', 'google', 'github'],
         embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
+          ethereum: {
+            createOnLogin: 'users-without-wallets',
+          },
         },
         defaultChain: braga,
         supportedChains: [braga],

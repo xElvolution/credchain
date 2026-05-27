@@ -1,7 +1,8 @@
 'use client';
 
 import { useEnsName } from 'wagmi';
-import { Globe, Twitter, Github, Share2 } from 'lucide-react';
+import { Globe, Share2 } from 'lucide-react';
+import { GithubIcon as Github, TwitterIcon as Twitter } from '@/components/ui/BrandIcons';
 import type { UserProfile } from '@/types';
 import { Avatar } from '@/components/ui/Avatar';
 import { CopyButton } from '@/components/ui/CopyButton';

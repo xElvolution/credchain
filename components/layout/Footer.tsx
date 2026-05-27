@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Github, Twitter } from 'lucide-react';
+import { GithubIcon as Github, TwitterIcon as Twitter } from '@/components/ui/BrandIcons';
 
 export function Footer() {
   return (
