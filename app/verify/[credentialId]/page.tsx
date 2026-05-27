@@ -196,7 +196,7 @@ function ProofRow({
     return (
       <div className="rounded-lg border border-border bg-surface p-3">
         <p className="text-xs text-muted">{label}</p>
-        <p className="mt-1 text-sm text-muted">—</p>
+        <p className="mt-1 text-sm text-muted">-</p>
       </div>
     );
   }

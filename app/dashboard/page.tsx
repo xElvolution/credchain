@@ -52,7 +52,7 @@ export default function DashboardPage() {
       <div className="container-x flex min-h-screen items-center justify-center pt-24">
         <Card hover={false} className="max-w-md text-center">
           <h1 className="text-2xl font-bold">Connect to continue</h1>
-          <p className="mt-2 text-text-secondary">Your dashboard is gated by your wallet — the same wallet that signs every credential.</p>
+          <p className="mt-2 text-text-secondary">Your dashboard is gated by your wallet - the same wallet that signs every credential.</p>
         </Card>
       </div>
     );
@@ -154,7 +154,7 @@ export default function DashboardPage() {
             <h2 className="text-xl font-semibold">Verifications received</h2>
             <p className="mt-2 text-sm text-text-secondary">
               {verifications === 0
-                ? 'No verifications yet — share your credentials with collaborators who can endorse them.'
+                ? 'No verifications yet - share your credentials with collaborators who can endorse them.'
                 : `${verifications} verification${verifications === 1 ? '' : 's'} across your credentials.`}
             </p>
           </Card>

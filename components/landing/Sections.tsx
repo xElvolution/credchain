@@ -16,7 +16,7 @@ import { useDrawLine } from '@/components/animations/GSAPWrapper';
 export function ProblemSection() {
   const pains = [
     { icon: FileX2, title: 'LinkedIn owns your data', desc: 'Your professional identity lives on a platform that can delete it, gate it, or sell it.' },
-    { icon: LinkIcon, title: 'IPFS pins expire', desc: 'Decentralized in name only — unpinned data vanishes when nobody pays to keep it alive.' },
+    { icon: LinkIcon, title: 'IPFS pins expire', desc: 'Decentralized in name only - unpinned data vanishes when nobody pays to keep it alive.' },
     { icon: Database, title: 'Resumes can’t be verified', desc: 'Anyone can claim anything. Employers have no cryptographic way to check the truth.' },
   ];
   return (
@@ -92,7 +92,7 @@ export function CredentialTypes() {
       <div className="container-x">
         <ScrollReveal>
           <h2 className="heading-section">Every kind of credential.</h2>
-          <p className="mt-3 max-w-xl text-text-secondary">From your first commit to your latest role — all of it, verifiable.</p>
+          <p className="mt-3 max-w-xl text-text-secondary">From your first commit to your latest role - all of it, verifiable.</p>
         </ScrollReveal>
         <motion.div
           variants={staggerContainer}
@@ -230,7 +230,7 @@ export function EmployerSection() {
           <h2 className="heading-section">Find verified talent instantly.</h2>
           <p className="mt-4 max-w-md text-text-secondary">
             Search by skill, role, or organization. Every result is backed by cryptographic
-            proof — no more taking resumes on faith.
+            proof - no more taking resumes on faith.
           </p>
           <Link href="/explore" className="mt-6 inline-block">
             <MagneticButton className="inline-flex h-12 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-white hover:bg-primary-hover">

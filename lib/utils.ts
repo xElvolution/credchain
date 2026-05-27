@@ -27,7 +27,7 @@ export function formatDateRange(start: string | Date | null, end: string | Date 
   if (!start) return '';
   const s = formatDate(start);
   const e = end ? formatDate(end) : 'Present';
-  return `${s} — ${e}`;
+  return `${s} - ${e}`;
 }
 
 export function formatNumber(n: number): string {

@@ -5,12 +5,12 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'CREDCHAIN — Your credentials. On-chain. Forever.',
+  title: 'CREDCHAIN - Your credentials. On-chain. Forever.',
   description:
     'The professional credential database owned by builders, not platforms. Store your work history on Arkiv Braga. Share it forever.',
   keywords: ['credentials', 'on-chain', 'Arkiv', 'Braga', 'web3', 'reputation', 'verifiable'],
   openGraph: {
-    title: 'CREDCHAIN — Your credentials. On-chain. Forever.',
+    title: 'CREDCHAIN - Your credentials. On-chain. Forever.',
     description: 'The professional credential database owned by builders, not platforms.',
     type: 'website',
   },
