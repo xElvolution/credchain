@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  address   String   @unique
+  username  String?  @unique
+  bio       String?
+  avatar    String?
+  website   String?
+  twitter   String?
+  github    String?
+  arkivProfileKey String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  credentials   Credential[]
+  verifications Verification[]
+
+  @@index([address])
+  @@index([username])
+}
+
+model Credential {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type         String
+  title        String
+  organization String
+  description  String?
+  startDate    DateTime?
+  endDate      DateTime?
+  url          String?
+  tags         String[]
+  arkivEntityKey String?  @map("arkivBlobId")
+  txHash           String?
+  blockNumber      Int?
+  verified     Boolean   @default(false)
+  verifiedBy   String?
+  createdAt    DateTime  @default(now())
+
+  verifications Verification[]
+
+  @@index([userId])
+  @@index([type])
+  @@index([arkivEntityKey])
+}
+
+model Verification {
+  id           String   @id @default(cuid())
+  credentialId String
+  credential   Credential @relation(fields: [credentialId], references: [id], onDelete: Cascade)
+  verifierId   String
+  verifier     User     @relation(fields: [verifierId], references: [id], onDelete: Cascade)
+  message      String?
+  txHash       String?
+  arkivEntityKey String?
+  createdAt    DateTime @default(now())
+
+  @@index([credentialId])
+  @@index([verifierId])
+}
+
+model SearchIndex {
+  id            String   @id @default(cuid())
+  address       String   @unique
+  skills        String[]
+  roles         String[]
+  organizations String[]
+  updatedAt     DateTime @updatedAt
+
+  @@index([address])
+}
