@@ -38,14 +38,18 @@ export function Footer() {
               <h4 className="text-sm font-semibold text-text-primary">Social</h4>
               <div className="mt-4 flex gap-3">
                 <a
-                  href="https://twitter.com"
+                  href="https://x.com/xElvolution"
+                  target="_blank"
+                  rel="noreferrer"
                   className="rounded-lg border border-border p-2 text-text-secondary transition-colors hover:border-primary hover:text-text-primary"
                   aria-label="Twitter"
                 >
                   <Twitter size={16} />
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/xElvolution/credchain"
+                  target="_blank"
+                  rel="noreferrer"
                   className="rounded-lg border border-border p-2 text-text-secondary transition-colors hover:border-primary hover:text-text-primary"
                   aria-label="GitHub"
                 >

@@ -47,18 +47,18 @@ export function ProfileHeader({ profile, isOwner, onVerify }: ProfileHeaderProps
 
         <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
           {profile.website && (
-            <a href={profile.website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-text-secondary hover:text-text-primary">
+            <a href={profile.website.startsWith('http') ? profile.website : `https://${profile.website}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-text-secondary hover:text-text-primary">
               <Globe size={14} /> Website
             </a>
           )}
           {profile.twitter && (
-            <a href={`https://twitter.com/${profile.twitter}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-text-secondary hover:text-text-primary">
-              <Twitter size={14} /> {profile.twitter}
+            <a href={profile.twitter.startsWith('http') ? profile.twitter : `https://x.com/${profile.twitter.replace(/^@/, '')}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-text-secondary hover:text-text-primary">
+              <Twitter size={14} /> {profile.twitter.replace(/^@/, '').replace(/^https?:\/\/(x\.com|twitter\.com)\//, '')}
             </a>
           )}
           {profile.github && (
-            <a href={`https://github.com/${profile.github}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-text-secondary hover:text-text-primary">
-              <Github size={14} /> {profile.github}
+            <a href={profile.github.startsWith('http') ? profile.github : `https://github.com/${profile.github}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-text-secondary hover:text-text-primary">
+              <Github size={14} /> {profile.github.replace(/^https?:\/\/github\.com\//, '')}
             </a>
           )}
         </div>

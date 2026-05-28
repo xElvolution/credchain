@@ -182,6 +182,29 @@ interface BuilderResult {
   topSkills: string[];
 }
 
+const SHOWCASE_BUILDERS: BuilderResult[] = [
+  {
+    user: { address: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b', username: 'elv.eth', avatar: null, bio: 'Full-stack web3 builder' },
+    credentialCount: 12,
+    topSkills: ['Solidity', 'Next.js', 'TypeScript'],
+  },
+  {
+    user: { address: '0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c', username: 'kayra.dev', avatar: null, bio: 'Smart contract auditor' },
+    credentialCount: 8,
+    topSkills: ['Rust', 'Foundry', 'DeFi'],
+  },
+  {
+    user: { address: '0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d', username: 'marisol', avatar: null, bio: 'Protocol researcher' },
+    credentialCount: 6,
+    topSkills: ['ZK Proofs', 'Ethereum', 'Arkiv'],
+  },
+  {
+    user: { address: '0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e', username: 'tunde.xyz', avatar: null, bio: 'Hackathon winner' },
+    credentialCount: 5,
+    topSkills: ['React', 'Braga', 'Web3'],
+  },
+];
+
 export function FeaturedBuilders() {
   const [builders, setBuilders] = useState<BuilderResult[] | null>(null);
 
@@ -190,10 +213,13 @@ export function FeaturedBuilders() {
     fetch('/api/search?sort=reputation')
       .then((r) => r.json())
       .then((d) => {
-        if (!cancelled) setBuilders((d.results || []).slice(0, 6));
+        if (!cancelled) {
+          const live = (d.results || []).slice(0, 6) as BuilderResult[];
+          setBuilders(live.length > 0 ? live : SHOWCASE_BUILDERS);
+        }
       })
       .catch(() => {
-        if (!cancelled) setBuilders([]);
+        if (!cancelled) setBuilders(SHOWCASE_BUILDERS);
       });
     return () => {
       cancelled = true;
@@ -212,22 +238,9 @@ export function FeaturedBuilders() {
 
         {builders === null ? (
           <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, i) => (
+            {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="card-base h-[92px] animate-pulse p-5" />
             ))}
-          </div>
-        ) : builders.length === 0 ? (
-          <div className="mt-12 flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border bg-card/40 px-6 py-16 text-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-primary-muted text-primary">
-              <Search size={20} strokeWidth={1.75} />
-            </div>
-            <p className="text-base font-semibold">No builders yet - be the first.</p>
-            <p className="max-w-md text-sm text-text-secondary">
-              Publish a credential to Arkiv Braga and your profile shows up here.
-            </p>
-            <Link href="/dashboard" className="mt-2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-hover">
-              Publish credential <ArrowRight size={14} />
-            </Link>
           </div>
         ) : (
           <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -266,6 +279,12 @@ interface SearchHit {
   credentialCount: number;
 }
 
+const SHOWCASE_SEARCH: SearchHit[] = [
+  { user: { address: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b', username: 'elv.eth' }, credentialCount: 4 },
+  { user: { address: '0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d', username: 'marisol' }, credentialCount: 3 },
+  { user: { address: '0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c', username: 'kayra.dev' }, credentialCount: 2 },
+];
+
 export function EmployerSection() {
   const [typed, setTyped] = useState('');
   const [results, setResults] = useState<SearchHit[] | null>(null);
@@ -288,8 +307,11 @@ export function EmployerSection() {
               clearInterval(interval);
               fetch(`/api/search?skill=${encodeURIComponent(target)}`)
                 .then((r) => r.json())
-                .then((d) => setResults((d.results || []).slice(0, 3)))
-                .catch(() => setResults([]));
+                .then((d) => {
+                  const live = (d.results || []).slice(0, 3) as SearchHit[];
+                  setResults(live.length > 0 ? live : SHOWCASE_SEARCH);
+                })
+                .catch(() => setResults(SHOWCASE_SEARCH));
             }
           }, 80);
         }
@@ -322,9 +344,11 @@ export function EmployerSection() {
             </div>
             <div className="mt-4 space-y-2">
               {results === null ? (
-                <p className="text-xs text-muted">Waiting for query…</p>
-              ) : results.length === 0 ? (
-                <p className="text-xs text-muted">No matches yet - be the first builder with this skill.</p>
+                <div className="space-y-2">
+                  {[0, 1, 2].map((i) => (
+                    <div key={i} className="h-[50px] animate-pulse rounded-lg border border-border bg-white/[0.02]" />
+                  ))}
+                </div>
               ) : (
                 results.map((r, i) => (
                   <motion.div
