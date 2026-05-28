@@ -24,14 +24,14 @@ export async function verifyPrivyToken(
   const client = getPrivy();
   if (!client) return null;
   try {
-    const claims = await client.utils().auth().verifyAccessToken({ access_token: token });
-    const userId = claims.userId;
+    const claims = await client.utils().auth().verifyAccessToken(token);
+    const userId = claims.user_id;
     if (!userId) return null;
 
-    const user = await client.users().get({ user_id: userId });
-    const linked = (user as any)?.linked_accounts ?? (user as any)?.linkedAccounts ?? [];
+    const user = await client.users()._get(userId);
+    const linked = user?.linked_accounts ?? [];
     const walletAccount = linked.find((a: any) => a?.type === 'wallet');
-    const rawAddress: unknown = walletAccount?.address;
+    const rawAddress: unknown = (walletAccount as any)?.address;
     const address = typeof rawAddress === 'string' ? rawAddress.toLowerCase() : null;
 
     return { userId, address };
