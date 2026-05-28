@@ -172,7 +172,7 @@ export default function ExplorePage() {
                   >
                     <Link href={`/profile/${r.user.address}`}>
                       <Card className="relative h-full overflow-hidden">
-                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-secondary" />
+                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-[#06B6D4]" />
                         <div className="flex items-center gap-3">
                           <Avatar address={r.user.address} src={r.user.avatar} size={48} />
                           <div className="min-w-0">
@@ -214,9 +214,21 @@ export default function ExplorePage() {
                 {Array.from({ length: 4 }).map((_, i) => <ProfileCardSkeleton key={i} />)}
               </div>
             ) : filtered.length === 0 ? (
-              <Card hover={false} className="text-center">
-                <p className="text-sm text-text-secondary">No matching builders yet.</p>
-              </Card>
+              <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border bg-card/40 px-6 py-20 text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-primary-muted text-primary">
+                  <Search size={22} strokeWidth={1.75} />
+                </div>
+                <p className="text-base font-semibold">No builders match this query yet.</p>
+                <p className="max-w-md text-sm text-text-secondary">
+                  Try a broader skill, or be the first to publish a credential and own this search result on Arkiv.
+                </p>
+                <Link
+                  href="/dashboard"
+                  className="mt-2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-hover"
+                >
+                  Publish a credential
+                </Link>
+              </div>
             ) : (
               <motion.div
                 variants={staggerContainer}

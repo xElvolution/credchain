@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Loader2, ExternalLink } from 'lucide-react';
 import { CREDENTIAL_TYPES, CREDENTIAL_TYPE_META, type CredentialType, type Credential } from '@/types';
+import { CREDENTIAL_TYPE_ICON } from '@/lib/credential-icons';
 import { Input, Textarea } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { cn, bragaTxUrl, truncateHash } from '@/lib/utils';
@@ -134,22 +135,25 @@ export function CredentialForm({ onCreated }: CredentialFormProps) {
   return (
     <div>
       <div className="mb-5 flex flex-wrap gap-2">
-        {CREDENTIAL_TYPES.map((t) => (
+        {CREDENTIAL_TYPES.map((t) => {
+          const Icon = CREDENTIAL_TYPE_ICON[t];
+          return (
           <button
             key={t}
             onClick={() => setType(t)}
             disabled={stage !== 'idle'}
             className={cn(
-              'rounded-lg border px-3 py-1.5 text-sm font-medium transition-all duration-200',
+              'inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-all duration-200',
               type === t
                 ? 'border-primary bg-primary-muted text-text-primary'
                 : 'border-border text-text-secondary hover:border-border-bright hover:text-text-primary'
             )}
           >
-            <span className="mr-1">{CREDENTIAL_TYPE_META[t].icon}</span>
+            <Icon size={14} className={type === t ? 'text-primary' : 'text-text-secondary'} />
             {CREDENTIAL_TYPE_META[t].label.split(' ')[0]}
           </button>
-        ))}
+          );
+        })}
       </div>
 
       <AnimatePresence mode="wait">
@@ -229,7 +233,7 @@ export function CredentialForm({ onCreated }: CredentialFormProps) {
                 href={bragaTxUrl(result.txHash)}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-indigo-300 hover:text-indigo-200"
+                className="inline-flex items-center gap-1.5 text-sm text-primary hover:opacity-80"
               >
                 View on Braga Explorer <ExternalLink size={14} />
               </a>

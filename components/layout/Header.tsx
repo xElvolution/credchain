@@ -33,7 +33,7 @@ export function Header() {
     >
       <div className="container-x flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary text-sm font-black text-background">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-black text-primary-foreground">
             C
           </span>
           <span className="text-lg font-bold tracking-tight">CREDCHAIN</span>

@@ -71,7 +71,7 @@ export function CredentialCard({ credential }: CredentialCardProps) {
               href={bragaTxUrl(c.txHash)}
               target="_blank"
               rel="noreferrer"
-              className="mono flex items-center gap-1 text-indigo-300 transition-colors hover:text-indigo-200"
+              className="mono flex items-center gap-1 text-primary transition-colors hover:opacity-80"
             >
               {truncateHash(c.txHash)}
               <ExternalLink size={11} />

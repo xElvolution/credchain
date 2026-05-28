@@ -108,7 +108,7 @@ export default function DashboardPage() {
               initial={{ width: 0 }}
               animate={{ width: `${completion}%` }}
               transition={{ duration: 1, ease: 'easeOut' }}
-              className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
+              className="h-full rounded-full bg-gradient-to-r from-primary to-[#06B6D4]"
             />
           </div>
         </Card>

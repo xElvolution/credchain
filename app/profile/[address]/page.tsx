@@ -172,7 +172,7 @@ export default function PublicProfilePage() {
                                       href={bragaTxUrl(c.txHash)}
                                       target="_blank"
                                       rel="noreferrer"
-                                      className="mono text-indigo-300 hover:text-indigo-200"
+                                      className="mono text-primary hover:opacity-80"
                                     >
                                       {truncateHash(c.txHash)}
                                     </a>

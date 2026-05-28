@@ -19,15 +19,15 @@ export const CREDENTIAL_TYPES: CredentialType[] = [
 
 export const CREDENTIAL_TYPE_META: Record<
   CredentialType,
-  { label: string; icon: string; color: string; description: string }
+  { label: string; color: string; description: string }
 > = {
-  WORK: { label: 'Work Experience', icon: '💼', color: 'type-work', description: 'Roles and positions held' },
-  PROJECT: { label: 'Projects Built', icon: '🛠️', color: 'type-project', description: 'Things you shipped' },
-  SKILL: { label: 'Skills & Technologies', icon: '🎯', color: 'type-skill', description: 'Technical proficiencies' },
-  EDUCATION: { label: 'Education', icon: '🎓', color: 'type-education', description: 'Degrees and programs' },
-  HACKATHON: { label: 'Hackathon Wins', icon: '🏆', color: 'type-hackathon', description: 'Competitions placed in' },
-  CERTIFICATION: { label: 'Certifications', icon: '📜', color: 'type-certification', description: 'Issued credentials' },
-  CONTRIBUTION: { label: 'Open Source Contributions', icon: '🤝', color: 'type-contribution', description: 'Merged PRs and commits' },
+  WORK: { label: 'Work Experience', color: 'type-work', description: 'Roles and positions held' },
+  PROJECT: { label: 'Projects Built', color: 'type-project', description: 'Things you shipped' },
+  SKILL: { label: 'Skills & Technologies', color: 'type-skill', description: 'Technical proficiencies' },
+  EDUCATION: { label: 'Education', color: 'type-education', description: 'Degrees and programs' },
+  HACKATHON: { label: 'Hackathon Wins', color: 'type-hackathon', description: 'Competitions placed in' },
+  CERTIFICATION: { label: 'Certifications', color: 'type-certification', description: 'Issued credentials' },
+  CONTRIBUTION: { label: 'Open Source Contributions', color: 'type-contribution', description: 'Merged PRs and commits' },
 };
 
 export interface User {

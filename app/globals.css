@@ -27,8 +27,8 @@ body {
 }
 
 ::selection {
-  background: rgba(79, 70, 229, 0.4);
-  color: #fff;
+  background: rgba(0, 255, 135, 0.35);
+  color: #04130C;
 }
 
 ::-webkit-scrollbar {
@@ -82,7 +82,7 @@ body {
 
   .card-hover:hover {
     border-color: var(--color-border-bright);
-    box-shadow: 0 0 40px -12px rgba(79, 70, 229, 0.35);
+    box-shadow: 0 0 40px -12px rgba(0, 255, 135, 0.25);
   }
 
   .text-gradient {
@@ -93,7 +93,7 @@ body {
   }
 
   .text-gradient-accent {
-    background: linear-gradient(135deg, #4F46E5 0%, #00FF87 100%);
+    background: linear-gradient(135deg, #FAFAFA 0%, #00FF87 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

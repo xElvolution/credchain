@@ -59,7 +59,7 @@ export function Hero() {
             className="mt-8 flex flex-wrap gap-4"
           >
             <Link href="/dashboard">
-              <MagneticButton className="inline-flex h-14 items-center gap-2 rounded-lg bg-primary px-8 text-base font-medium text-white shadow-[0_0_32px_-6px_rgba(79,70,229,0.7)] transition-colors hover:bg-primary-hover">
+              <MagneticButton className="inline-flex h-14 items-center gap-2 rounded-lg bg-primary px-8 text-base font-semibold text-primary-foreground shadow-[0_0_32px_-6px_rgba(0,255,135,0.6)] transition-colors hover:bg-primary-hover">
                 Publish Your First Credential <ArrowRight size={18} />
               </MagneticButton>
             </Link>

@@ -6,7 +6,7 @@ import type { CredentialType } from '@/types';
 
 const TYPE_STYLES: Record<CredentialType, string> = {
   WORK: 'bg-type-work/15 text-type-work border-type-work/30',
-  PROJECT: 'bg-type-project/15 text-indigo-300 border-type-project/30',
+  PROJECT: 'bg-type-project/15 text-purple-300 border-type-project/30',
   SKILL: 'bg-type-skill/15 text-type-skill border-type-skill/30',
   EDUCATION: 'bg-type-education/15 text-type-education border-type-education/30',
   HACKATHON: 'bg-type-hackathon/15 text-type-hackathon border-type-hackathon/30',
@@ -24,7 +24,7 @@ export function Badge({
   variant?: 'default' | 'success' | 'muted';
 }) {
   const styles = {
-    default: 'bg-primary-muted text-indigo-300 border-primary/30',
+    default: 'bg-primary-muted text-primary border-primary/30',
     success: 'bg-secondary-muted text-secondary border-secondary/30',
     muted: 'bg-white/5 text-text-secondary border-border',
   };

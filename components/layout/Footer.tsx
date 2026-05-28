@@ -8,7 +8,7 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-10 md:flex-row">
           <div className="max-w-sm">
             <div className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary text-sm font-black text-background">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-black text-primary-foreground">
                 C
               </span>
               <span className="text-lg font-bold tracking-tight">CREDCHAIN</span>
