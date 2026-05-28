@@ -40,8 +40,9 @@ export function useCredentials(address?: string) {
     });
     const json = await res.json();
     if (!res.ok) {
-      toast.error(json.error || 'Verification failed');
-      throw new Error(json.error);
+      const errMsg = typeof json.error === 'string' ? json.error : 'Verification failed';
+      toast.error(errMsg);
+      throw new Error(errMsg);
     }
     setCredentials((prev) =>
       prev.map((c) => (c.id === credentialId ? { ...c, verified: true } : c))

@@ -23,7 +23,7 @@ import toast from 'react-hot-toast';
 export default function PublicProfilePage() {
   const params = useParams<{ address: string }>();
   const addr = (params?.address || '').toLowerCase();
-  const { address: myAddress } = useWallet();
+  const { address: myAddress, isConnected, signIn } = useWallet();
   const { profile, loading, fetchProfile } = useProfile(addr);
   const { verifyCredential } = useCredentials();
   const [verifyingId, setVerifyingId] = useState<string | null>(null);
@@ -81,7 +81,13 @@ export default function PublicProfilePage() {
           <ProfileHeader
             profile={profile}
             isOwner={isOwner}
-            onVerify={() => toast('Click "Verify this" under any credential to endorse it.')}
+            onVerify={() => {
+              if (!isConnected) {
+                signIn();
+                return;
+              }
+              toast('Click "Verify this" under any credential to endorse it.');
+            }}
           />
         </div>
       </Card>
@@ -179,9 +185,19 @@ export default function PublicProfilePage() {
                                   </div>
                                 )}
                               </div>
-                              {!isOwner && myAddress && (
-                                <Button size="sm" variant="ghost" onClick={() => setVerifyingId(c.id)}>
-                                  Verify this
+                              {!isOwner && (
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  onClick={() => {
+                                    if (!isConnected) {
+                                      signIn();
+                                      return;
+                                    }
+                                    setVerifyingId(c.id);
+                                  }}
+                                >
+                                  {isConnected ? 'Verify this' : 'Connect to verify'}
                                 </Button>
                               )}
                               {verifs.length > 0 && (

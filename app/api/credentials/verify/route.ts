@@ -18,7 +18,10 @@ export async function POST(req: NextRequest) {
 
     const parsed = Body.safeParse(await req.json());
     if (!parsed.success) {
-      return NextResponse.json({ error: flattenZodError(parsed.error) }, { status: 400 });
+      const flat = flattenZodError(parsed.error);
+      const fieldMsgs = Object.entries(flat.fieldErrors || {}).map(([k, v]) => `${k}: ${(v as string[]).join(', ')}`);
+      const msg = [...(flat.formErrors || []), ...fieldMsgs].join('; ') || 'Invalid input';
+      return NextResponse.json({ error: msg }, { status: 400 });
     }
 
     const credential = await prisma.credential.findUnique({
@@ -46,8 +49,8 @@ export async function POST(req: NextRequest) {
       create: { address: session.address },
     });
 
-    const existing = await prisma.verification.findFirst({
-      where: { credentialId: credential.id, verifierId: verifier.id },
+    const existing = await prisma.verification.findUnique({
+      where: { credentialId_verifierId: { credentialId: credential.id, verifierId: verifier.id } },
     });
     if (existing) {
       return NextResponse.json({ error: 'Already verified' }, { status: 409 });
@@ -78,7 +81,10 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ verification });
-  } catch (err) {
+  } catch (err: any) {
+    if (err?.code === 'P2002') {
+      return NextResponse.json({ error: 'Already verified' }, { status: 409 });
+    }
     console.error('[credentials/verify]', err);
     return NextResponse.json({ error: 'Failed to verify' }, { status: 500 });
   }

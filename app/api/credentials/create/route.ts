@@ -24,7 +24,10 @@ export async function POST(req: NextRequest) {
 
     const parsed = Body.safeParse(await req.json());
     if (!parsed.success) {
-      return NextResponse.json({ error: flattenZodError(parsed.error) }, { status: 400 });
+      const flat = flattenZodError(parsed.error);
+      const fieldMsgs = Object.entries(flat.fieldErrors || {}).map(([k, v]) => `${k}: ${(v as string[]).join(', ')}`);
+      const msg = [...(flat.formErrors || []), ...fieldMsgs].join('; ') || 'Invalid input';
+      return NextResponse.json({ error: msg }, { status: 400 });
     }
     const input = parsed.data;
     if (!CREDENTIAL_TYPES.includes(input.type)) {

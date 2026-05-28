@@ -4,21 +4,32 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Check, ExternalLink, X, Clock } from 'lucide-react';
+import { Check, ExternalLink, X, Clock, ShieldCheck } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Modal } from '@/components/ui/Modal';
+import { Textarea } from '@/components/ui/Input';
 import { TypeBadge, Chip } from '@/components/ui/Badge';
 import { CopyButton } from '@/components/ui/CopyButton';
 import { Avatar } from '@/components/ui/Avatar';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { VerificationBadge } from '@/components/credentials/VerificationBadge';
 import { truncateAddress, truncateHash, arkivExplorerUrl, bragaTxUrl, formatDate, formatDateRange } from '@/lib/utils';
+import { useWallet } from '@/hooks/useWallet';
+import { useCredentials } from '@/hooks/useCredentials';
 import type { CredentialType } from '@/types';
+import toast from 'react-hot-toast';
 
 export default function VerifyPage() {
   const params = useParams<{ credentialId: string }>();
   const id = params?.credentialId;
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const { address: myAddress, isConnected, signIn } = useWallet();
+  const { verifyCredential } = useCredentials();
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const [verifyMsg, setVerifyMsg] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -180,10 +191,64 @@ export default function VerifyPage() {
             </div>
           )}
 
+          {c.ownerAddress?.toLowerCase() !== myAddress?.toLowerCase() && (
+            <div className="border-t border-border pt-4 text-center">
+              <Button
+                size="md"
+                onClick={() => {
+                  if (!isConnected) {
+                    signIn();
+                    return;
+                  }
+                  setShowVerifyModal(true);
+                }}
+              >
+                <ShieldCheck size={16} />
+                {isConnected ? 'Endorse this credential' : 'Connect wallet to endorse'}
+              </Button>
+            </div>
+          )}
+
           <div className="border-t border-border pt-4 text-center text-sm text-text-secondary">
             Anyone can verify this. Right now. Forever.
           </div>
         </Card>
+
+        <Modal open={showVerifyModal} onClose={() => setShowVerifyModal(false)} title="Endorse this credential">
+          <p className="text-sm text-text-secondary">
+            Your endorsement is recorded on-chain as an Arkiv entity. Add an optional note explaining how you know this is real.
+          </p>
+          <div className="mt-4">
+            <Textarea
+              placeholder="Optional message"
+              value={verifyMsg}
+              onChange={(e) => setVerifyMsg(e.target.value)}
+            />
+          </div>
+          <div className="mt-4 flex justify-end gap-2">
+            <Button variant="ghost" onClick={() => setShowVerifyModal(false)}>Cancel</Button>
+            <Button
+              loading={submitting}
+              onClick={async () => {
+                if (!id) return;
+                setSubmitting(true);
+                try {
+                  await verifyCredential(id, verifyMsg);
+                  setShowVerifyModal(false);
+                  setVerifyMsg('');
+                  const res = await fetch(`/api/credentials/proof?id=${id}`);
+                  const json = await res.json();
+                  setData(json);
+                } catch {
+                } finally {
+                  setSubmitting(false);
+                }
+              }}
+            >
+              Endorse
+            </Button>
+          </div>
+        </Modal>
       </div>
     </div>
   );
