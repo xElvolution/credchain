@@ -49,11 +49,98 @@ export default function DashboardPage() {
 
   if (!isConnected) {
     return (
-      <div className="container-x flex min-h-screen items-center justify-center pt-24">
-        <Card hover={false} className="max-w-md text-center">
-          <h1 className="text-2xl font-bold">Connect to continue</h1>
-          <p className="mt-2 text-text-secondary">Your dashboard is gated by your wallet - the same wallet that signs every credential.</p>
-        </Card>
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.07] blur-[120px]" />
+          <div className="absolute left-1/3 top-1/3 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/[0.05] blur-[100px]" />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-md"
+        >
+          <div className="rounded-2xl border border-border bg-card/80 p-8 backdrop-blur-xl sm:p-10">
+            {/* Wallet icon */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
+                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
+                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
+              </svg>
+            </motion.div>
+
+            {/* Heading */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.5 }}
+              className="mt-6 text-center"
+            >
+              <h1 className="text-2xl font-bold tracking-tight text-text-primary">
+                Connect your wallet
+              </h1>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                Your dashboard is gated by your wallet. The same key that opens it signs every credential you publish.
+              </p>
+            </motion.div>
+
+            {/* Connect button */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="mt-8"
+            >
+              <Button
+                size="lg"
+                className="w-full text-base"
+                onClick={signIn}
+                loading={signingIn}
+              >
+                Connect Wallet
+              </Button>
+            </motion.div>
+
+            {/* Features */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.5 }}
+              className="mt-8 space-y-3"
+            >
+              {[
+                { icon: ShieldCheck, text: 'Credentials signed by your wallet' },
+                { icon: Sparkles, text: 'Stored as Arkiv entities on Braga' },
+                { icon: ExternalLink, text: 'Publicly verifiable by anyone' },
+              ].map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-3 text-sm text-text-secondary">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-bright bg-white/[0.03]">
+                    <Icon size={14} className="text-primary" />
+                  </div>
+                  {text}
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Bottom hint */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+            className="mt-4 text-center text-xs text-text-secondary/60"
+          >
+            Powered by Privy. No seed phrase required.
+          </motion.p>
+        </motion.div>
       </div>
     );
   }
@@ -257,7 +344,7 @@ function SettingsPanel({
               }}
             />
             <span className="rounded-lg border border-border px-3 py-1.5 transition-colors hover:border-white/20">
-              {uploading ? 'Uploading…' : 'Upload to Supabase'}
+              {uploading ? 'Uploading...' : 'Upload image'}
             </span>
           </label>
         </div>

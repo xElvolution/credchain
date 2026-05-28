@@ -1,22 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readSession } from '@/lib/session';
-import { uploadAvatar } from '@/lib/supabase-storage';
-import { getServiceSupabase } from '@/lib/supabase';
+import { writeFile, mkdir } from 'node:fs/promises';
+import { join } from 'node:path';
+import { existsSync } from 'node:fs';
 
-const MAX_BYTES = 2 * 1024 * 1024; // 2 MB
+const MAX_BYTES = 2 * 1024 * 1024;
 const ALLOWED = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+
+const EXT_MAP: Record<string, string> = {
+  'image/jpeg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+  'image/gif': '.gif',
+};
 
 export async function POST(req: NextRequest) {
   try {
     const session = await readSession();
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
-    if (!getServiceSupabase()) {
-      return NextResponse.json(
-        { error: 'Supabase storage not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.' },
-        { status: 503 }
-      );
-    }
 
     const form = await req.formData();
     const file = form.get('file');
@@ -33,10 +34,16 @@ export async function POST(req: NextRequest) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const url = await uploadAvatar(session.address, buffer, file.type);
-    if (!url) {
-      return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    const ext = EXT_MAP[file.type] || '.png';
+    const filename = `${session.address}${ext}`;
+    const uploadsDir = join(process.cwd(), 'public', 'uploads', 'avatars');
+
+    if (!existsSync(uploadsDir)) {
+      await mkdir(uploadsDir, { recursive: true });
     }
+
+    await writeFile(join(uploadsDir, filename), buffer);
+    const url = `/uploads/avatars/${filename}?t=${Date.now()}`;
 
     return NextResponse.json({ url });
   } catch (err) {
