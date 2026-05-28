@@ -26,7 +26,7 @@ export function Providers({ children }: { children: ReactNode }) {
       config={{
         appearance: {
           theme: 'dark',
-          accentColor: '#00FF87',
+          accentColor: '#7C3AED',
           logo: undefined,
           showWalletLoginFirst: false,
         },
@@ -53,7 +53,7 @@ export function Providers({ children }: { children: ReactNode }) {
                 fontFamily: 'Inter, system-ui, sans-serif',
                 fontSize: '14px',
               },
-              success: { iconTheme: { primary: '#00FF87', secondary: '#0A0A0F' } },
+              success: { iconTheme: { primary: '#A78BFA', secondary: '#0A0A0F' } },
               error: { iconTheme: { primary: '#F43F5E', secondary: '#0A0A0F' } },
             }}
           />

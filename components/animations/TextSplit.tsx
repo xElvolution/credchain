@@ -13,7 +13,7 @@ interface TextSplitProps {
 }
 
 /**
- * Free GSAP SplitText alternative — splits text into <span> chars
+ * Free GSAP SplitText alternative - splits text into <span> chars
  * preserving whitespace, then staggers them in (y:40 → 0, opacity:0 → 1).
  * No paid Club GSAP plugin required.
  */

@@ -9,7 +9,7 @@ interface Particle {
   vy: number;
 }
 
-const COLORS = ['#00FF87', '#33FFA0'];
+const COLORS = ['#7C3AED', '#A78BFA'];
 const PARTICLE_COUNT = 150;
 const LINK_DIST = 120;
 
@@ -95,7 +95,7 @@ export function ParticleField({ className = '' }: { className?: string }) {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = '#00FF87';
+            ctx.strokeStyle = '#7C3AED';
             ctx.globalAlpha = (1 - dist / LINK_DIST) * 0.18;
             ctx.lineWidth = 1;
             ctx.stroke();

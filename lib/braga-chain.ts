@@ -1,4 +1,4 @@
-/** Arkiv Braga testnet — single chain for CREDCHAIN data + auth wallets. */
+/** Arkiv Braga testnet - single chain for CREDCHAIN data + auth wallets. */
 export { braga } from '@arkiv-network/sdk/chains';
 
 export const BRAGA_RPC =

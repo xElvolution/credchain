@@ -25,7 +25,7 @@ export function useVerification() {
     setState((s) => ({ ...s, loading: true }));
     try {
       const res = await fetch(`/api/credentials/get?id=${credentialId}`);
-      // Verify endpoint returns proof — done on the verify page directly.
+      // Verify endpoint returns proof - done on the verify page directly.
       const json = await res.json().catch(() => ({}));
       setState((s) => ({ ...s, loading: false, ...json }));
       return json;

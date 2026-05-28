@@ -32,7 +32,7 @@ export function Hero() {
             Built on Arkiv Braga
           </motion.div>
 
-          <h1 className="heading-fluid">
+          <h1 className="heading-fluid leading-[1.02]">
             <TextSplit as="span" text="Your Credentials." className="block text-text-primary" />
             <TextSplit
               as="span"
@@ -46,7 +46,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-text-secondary"
+            className="mt-4 max-w-xl text-lg leading-relaxed text-text-secondary"
           >
             The professional credential database owned by builders, not platforms.
             Store your work history on Arkiv Braga. Verifiable entities. Share it forever.
@@ -56,10 +56,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.5 }}
-            className="mt-8 flex flex-wrap gap-4"
+            className="mt-6 flex flex-wrap gap-4"
           >
             <Link href="/dashboard">
-              <MagneticButton className="inline-flex h-14 items-center gap-2 rounded-lg bg-primary px-8 text-base font-semibold text-primary-foreground shadow-[0_0_32px_-6px_rgba(0,255,135,0.6)] transition-colors hover:bg-primary-hover">
+              <MagneticButton className="inline-flex h-14 items-center gap-2 rounded-lg bg-primary px-8 text-base font-semibold text-primary-foreground shadow-[0_0_32px_-6px_rgba(124,58,237,0.6)] transition-colors hover:bg-primary-hover">
                 Publish Your First Credential <ArrowRight size={18} />
               </MagneticButton>
             </Link>

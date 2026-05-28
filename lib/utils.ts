@@ -35,16 +35,16 @@ export function formatNumber(n: number): string {
 }
 
 const AVATAR_PALETTE = [
-  ['#00FF87', '#06B6D4'],
-  ['#10B981', '#00FF87'],
-  ['#14B8A6', '#3B82F6'],
-  ['#00FF87', '#A855F7'],
-  ['#22D3EE', '#00FF87'],
-  ['#34D399', '#10B981'],
+  ['#7C3AED', '#06B6D4'],
+  ['#A78BFA', '#7C3AED'],
+  ['#14B8A6', '#7C3AED'],
+  ['#7C3AED', '#EC4899'],
+  ['#22D3EE', '#7C3AED'],
+  ['#A78BFA', '#3B82F6'],
 ];
 
 export function gradientFromAddress(address: string): string {
-  if (!address) return `linear-gradient(135deg, #00FF87, #06B6D4)`;
+  if (!address) return `linear-gradient(135deg, #7C3AED, #06B6D4)`;
   const seed = parseInt(address.slice(2, 10), 16);
   const [a, b] = AVATAR_PALETTE[seed % AVATAR_PALETTE.length];
   const angle = (seed % 360);

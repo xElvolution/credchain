@@ -1,5 +1,5 @@
 /**
- * Globally unique project attribute — required on every entity and query.
+ * Globally unique project attribute - required on every entity and query.
  * @see https://docs.arkiv.network/typescript-sdk/best-practices/
  */
 import { BRAGA_EXPLORER_BASE } from '@/lib/braga-chain';

@@ -1,5 +1,5 @@
 /**
- * Arkiv entity service — Braga testnet via @arkiv-network/sdk.
+ * Arkiv entity service - Braga testnet via @arkiv-network/sdk.
  *
  * Entity model (challenge requirements):
  * - payload + contentType + attributes + expiresIn on every entity
@@ -432,7 +432,7 @@ export async function queryProfilesBySkill(skill: string): Promise<string[]> {
   }
 }
 
-/** @deprecated Use verifyEntity — kept for API compat */
+/** @deprecated Use verifyEntity - kept for API compat */
 export async function verifyCredential(entityKey: string): Promise<{ exists: boolean; blockNumber: number }> {
   const proof = await verifyEntity(entityKey);
   return { exists: proof.exists, blockNumber: proof.exists ? 1 : 0 };

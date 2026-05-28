@@ -64,8 +64,8 @@ export function HowItWorks() {
             <path ref={lineRef} d="M0 1 L1000 1" stroke="url(#stepGrad)" strokeWidth="2" fill="none" />
             <defs>
               <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#00FF87" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#00FF87" />
+                <stop offset="0%" stopColor="#7C3AED" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#A78BFA" />
               </linearGradient>
             </defs>
           </svg>
@@ -161,7 +161,7 @@ export function LiveStats() {
               <ScrollReveal key={s.label} className="text-center">
                 <p className="text-gradient-accent text-4xl font-bold sm:text-5xl">
                   {stats === null ? (
-                    <span className="text-text-secondary">—</span>
+                    <span className="text-text-secondary">-</span>
                   ) : (
                     <CounterAnimation target={value} />
                   )}
@@ -221,7 +221,7 @@ export function FeaturedBuilders() {
             <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-primary-muted text-primary">
               <Search size={20} strokeWidth={1.75} />
             </div>
-            <p className="text-base font-semibold">No builders yet — be the first.</p>
+            <p className="text-base font-semibold">No builders yet - be the first.</p>
             <p className="max-w-md text-sm text-text-secondary">
               Publish a credential to Arkiv Braga and your profile shows up here.
             </p>
@@ -306,7 +306,7 @@ export function EmployerSection() {
         <ScrollReveal>
           <h2 className="heading-section">Hire from on-chain proof.</h2>
           <p className="mt-4 text-text-secondary">
-            Skip the LinkedIn scroll. Query Arkiv directly: skills, organizations, hackathon wins —
+            Skip the LinkedIn scroll. Query Arkiv directly: skills, organizations, hackathon wins -
             every credential carries cryptographic proof.
           </p>
           <Link href="/explore" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary">
@@ -324,7 +324,7 @@ export function EmployerSection() {
               {results === null ? (
                 <p className="text-xs text-muted">Waiting for query…</p>
               ) : results.length === 0 ? (
-                <p className="text-xs text-muted">No matches yet — be the first builder with this skill.</p>
+                <p className="text-xs text-muted">No matches yet - be the first builder with this skill.</p>
               ) : (
                 results.map((r, i) => (
                   <motion.div
@@ -358,7 +358,7 @@ export function CTABand() {
         <ScrollReveal>
           <h2 className="heading-section mx-auto max-w-2xl">Start building your on-chain reputation.</h2>
           <Link href="/dashboard" className="mt-8 inline-block">
-            <MagneticButton className="inline-flex h-14 items-center gap-2 rounded-lg bg-primary px-10 text-base font-semibold text-primary-foreground shadow-[0_0_40px_-6px_rgba(0,255,135,0.6)] hover:bg-primary-hover">
+            <MagneticButton className="inline-flex h-14 items-center gap-2 rounded-lg bg-primary px-10 text-base font-semibold text-primary-foreground shadow-[0_0_40px_-6px_rgba(124,58,237,0.6)] hover:bg-primary-hover">
               Get Started <ArrowRight size={18} />
             </MagneticButton>
           </Link>

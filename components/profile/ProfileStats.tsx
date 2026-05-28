@@ -59,8 +59,8 @@ export function ReputationRing({ score, max = 1000, size = 180 }: ReputationRing
         />
         <defs>
           <linearGradient id="repGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00FF87" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#00FF87" />
+            <stop offset="0%" stopColor="#7C3AED" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#A78BFA" />
           </linearGradient>
         </defs>
       </svg>

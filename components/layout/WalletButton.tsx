@@ -18,7 +18,7 @@ export function WalletButton() {
     return (
       <button
         onClick={login}
-        className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_-8px_rgba(0,255,135,0.55)] transition-all duration-200 hover:bg-primary-hover"
+        className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_-8px_rgba(124,58,237,0.55)] transition-all duration-200 hover:bg-primary-hover"
       >
         <Wallet size={16} />
         Sign in
