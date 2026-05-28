@@ -37,7 +37,8 @@ export function useProfile(address?: string) {
     });
     const json = await res.json();
     if (!res.ok) {
-      toast.error(json.error?.formErrors?.[0] || json.error || 'Update failed');
+      const errMsg = typeof json.error === 'string' ? json.error : 'Update failed';
+      toast.error(errMsg);
       throw new Error('Update failed');
     }
     setProfile((prev) => (prev ? { ...prev, ...json.user } : json.user));
