@@ -7,12 +7,12 @@ import { reputationScore } from '@/lib/utils';
 import { flattenZodError } from '@/lib/zod-utils';
 
 const PatchBody = z.object({
-  username: z.string().min(2).max(40).regex(/^[a-zA-Z0-9_-]+$/).optional().or(z.null()),
-  bio: z.string().max(280).optional().or(z.null()),
+  username: z.string().min(2).max(40).regex(/^[a-zA-Z0-9_-]+$/).optional().or(z.literal('')).or(z.null()),
+  bio: z.string().max(280).optional().or(z.literal('')).or(z.null()),
   website: z.url().optional().or(z.literal('')).or(z.null()),
-  twitter: z.string().max(40).optional().or(z.null()),
-  github: z.string().max(40).optional().or(z.null()),
-  avatar: z.url().optional().or(z.null()),
+  twitter: z.string().max(40).optional().or(z.literal('')).or(z.null()),
+  github: z.string().max(40).optional().or(z.literal('')).or(z.null()),
+  avatar: z.string().max(500).optional().or(z.literal('')).or(z.null()),
 });
 
 export async function GET(req: NextRequest) {
